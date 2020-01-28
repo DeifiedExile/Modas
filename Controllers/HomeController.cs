@@ -7,7 +7,7 @@ namespace Modas.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly int PageSize = 20;
+        private readonly int PageSize = 15;
         private IEventRepository repository;
         public HomeController(IEventRepository repo)
         {
