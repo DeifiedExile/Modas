@@ -65,6 +65,7 @@ namespace Modas.Models
                         Event e = new Event { TimeStamp = x, Flagged = false, Location = context.Locations.FirstOrDefault(l => l.Name == Locations[loc].Name) };
                         // add daily events to sorted list
                         dailyEvents.Add(e.TimeStamp, e);
+                        
                     }
                     // using sorted list for daily events, add to event list
                     foreach (var item in dailyEvents)
@@ -75,8 +76,9 @@ namespace Modas.Models
                     }
                     // add 1 day
                     eventDate = eventDate.AddDays(1);
+                    context.SaveChanges();
                 }
-                context.SaveChanges();
+                
             }
         }
     }
