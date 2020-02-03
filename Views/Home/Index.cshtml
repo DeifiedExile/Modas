@@ -1,6 +1,7 @@
 ﻿
 @using Modas.Models
-@model IEnumerable<Event>
+@using Modas.Models.ViewModels
+@model EventListViewModel
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,10 +11,10 @@
     <link href="~/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-
-    <table class="container table table-bordered">
+<div class="container">
+    <table class="container table table-bordered table-striped table-dark">
         <tr><th>Date</th><th>Time</th><th>Location</th></tr>
-        @foreach (var e in Model)
+        @foreach (var e in Model.Events)
         {
             <tr>
                 <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
@@ -22,10 +23,38 @@
             </tr>
         }
     </table>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
-    <script src="~/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"></script>
+    <div class="row">
+        <div class="col">
+            <button id="first" class="btn btn-primary " type="button" data-page="1"><a class="fa fa-angle-double-left"></a></button>
+            <button id="previous" class="btn btn-primary " type="button" data-page="@Model.PagingInfo.PreviousPage"><a class="fa fa-angle-double-left"></a></button>
+
+        </div>
+        <div class="col text-center">
+            <span id="start">@(Model.PagingInfo.RangeStart)</span>-<span id="end">@(Model.PagingInfo.RangeEnd)</span>
+            of
+            <span id="total">@(Model.PagingInfo.TotalItems)</span>
+        </div>
+        <div class="col text-right">
+            <button id="next" class="btn btn-primary " type="button" data-page="@Model.PagingInfo.NextPage"><a class="fa fa-angle-double-right"></a></button>
+            <button id="last" class="btn btn-primary " type="button" data-page="@Model.PagingInfo.TotalPages"><a class="fa fa-angle-double-right"></a></button>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"></script>
 </body>
+<script>
+    $('#first, #next, #previous, #last').on('click', function () {
+        location.href = "page" + $(this).data('page');
+    })
+    $('#first, #previous').prop('disabled', $('#start').html() == "1");
+   
+    $('#last, #next').prop('disabled', $('#end').html() == $('#total').html());
+</script>
 </html>
