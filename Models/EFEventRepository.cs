@@ -17,6 +17,7 @@ namespace Modas.Models
         public IQueryable<Event> Events => context.Events;
         public IQueryable<Location> Locations => context.Locations;
 
+        //add an event
         public Event AddEvent(Event evt)
         {
             context.Add(evt);
@@ -24,6 +25,7 @@ namespace Modas.Models
             return evt;
         }
 
+        //update an event
         public Event UpdateEvent(Event evt)
         {
             Event Event = context.Events.FirstOrDefault(e => e.EventId == evt.EventId);
@@ -32,6 +34,14 @@ namespace Modas.Models
             Event.LocationId = evt.LocationId;
             context.SaveChanges();
             return Event;
+        }
+
+        //delete an event
+        public void DeleteEvent(int eventId)
+        {
+            Event evt = context.Events.FirstOrDefault(e => e.EventId == eventId);
+            context.Events.Remove(evt);
+            context.SaveChanges();
         }
     }
 }

@@ -39,6 +39,10 @@ namespace Modas.Controllers
         // update event
         public Event Put([FromBody] Event evt) => repository.UpdateEvent(evt);
 
+        [HttpDelete("{id}")]
+        // delete event
+        public void Delete(int id) => repository.DeleteEvent(id);
+
 
     }
 }
