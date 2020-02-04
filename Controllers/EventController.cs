@@ -33,5 +33,12 @@ namespace Modas.Controllers
             Flagged = evt.Flagged,
             LocationId = evt.LocationId
         });
+
+
+        [HttpPut]
+        // update event
+        public Event Put([FromBody] Event evt) => repository.UpdateEvent(evt);
+
+
     }
 }

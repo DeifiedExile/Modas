@@ -11,5 +11,6 @@ namespace Modas.Models
         IQueryable<Location> Locations { get; }
 
         Event AddEvent(Event evt);
+        Event UpdateEvent(Event evt);
     }
 }
