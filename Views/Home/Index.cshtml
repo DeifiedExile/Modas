@@ -9,33 +9,37 @@
     <title>MODAS</title>
     <link href="~/css/all.min.css" rel="stylesheet" />
     <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="container">
-    <table class="border shadow-sm table table-bordered table-striped table-dark ">
-        <tr><th>Flag</th><th>Date</th><th>Time</th><th>Location</th></tr>
-        @foreach (var e in Model.Events)
-        {
-            <tr>
-                <td><a class="far fa-flag flag"></a></td>
-                <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
-                <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
-                <td>@e.Location.Name</td>
-            </tr>
-        }
-    </table>
     <div class="row">
-        <div class="col">
+        <table class="border shadow-sm table table-bordered table-striped table-dark col-sm-6 offset-3 ">
+            <tr><th>Flag</th><th>Date</th><th>Time</th><th>Location</th></tr>
+            @foreach (var e in Model.Events)
+            {
+                <tr>
+                    <td><a class="far fa-flag flag"></a></td>
+                    <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
+                    <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
+                    <td>@e.Location.Name</td>
+                </tr>
+            }
+        </table>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-2 offset-3">
             <button id="first" class="btn btn-primary " type="button" data-page="1"><a class="fa fa-angle-double-left"></a></button>
             <button id="previous" class="btn btn-primary " type="button" data-page="@Model.PagingInfo.PreviousPage"><a class="fa fa-angle-double-left"></a></button>
 
         </div>
-        <div class="col text-center">
+        <div class="col-sm-2 text-center">
             <span id="start">@(Model.PagingInfo.RangeStart)</span>-<span id="end">@(Model.PagingInfo.RangeEnd)</span>
             of
             <span id="total">@(Model.PagingInfo.TotalItems)</span>
         </div>
-        <div class="col text-right">
+        <div class="col-sm-2 text-right">
             <button id="next" class="btn btn-primary " type="button" data-page="@Model.PagingInfo.NextPage"><a class="fa fa-angle-double-right"></a></button>
             <button id="last" class="btn btn-primary " type="button" data-page="@Model.PagingInfo.TotalPages"><a class="fa fa-angle-double-right"></a></button>
         </div>
@@ -50,6 +54,7 @@
 <script src="~/js/bootstrap.min.js"></script>
 @*<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"></script>*@
 <script src ="/css/all.css"></script>
+
 </body>
 <script>
     $('#first, #next, #previous, #last').on('click',
@@ -63,5 +68,6 @@
         function() {
             $(this).toggleClass('far fas');
         });
+   
 </script>
 </html>
