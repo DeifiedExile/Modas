@@ -13,10 +13,11 @@
 <body>
 <div class="container">
     <table class="border shadow-sm table table-bordered table-striped table-dark ">
-        <tr><th>Date</th><th>Time</th><th>Location</th></tr>
+        <tr><th>Flag</th><th>Date</th><th>Time</th><th>Location</th></tr>
         @foreach (var e in Model.Events)
         {
             <tr>
+                <td><a class="far fa-flag flag"></a></td>
                 <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
                 <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
                 <td>@e.Location.Name</td>
@@ -47,14 +48,20 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 <script src="~/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"></script>
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"></script>*@
+<script src ="/css/all.css"></script>
 </body>
 <script>
-    $('#first, #next, #previous, #last').on('click', function () {
-        location.href = "page" + $(this).data('page');
-    })
+    $('#first, #next, #previous, #last').on('click',
+        function() {
+            location.href = "page" + $(this).data('page');
+        });
     $('#first, #previous').prop('disabled', $('#start').html() == "1");
    
     $('#last, #next').prop('disabled', $('#end').html() == $('#total').html());
+    $('a.flag').on('click',
+        function() {
+            $(this).toggleClass('far fas');
+        });
 </script>
 </html>
