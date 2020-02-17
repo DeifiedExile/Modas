@@ -83,4 +83,15 @@ $(function () {
         var minutes = time.split(":")[1];
         return hours + ":" + minutes + am_pm;
     }
+
+    $('.flag').on('click', function () {
+        // TODO: AJAX to update database
+        if ($(this).data('checked')) {
+            $(this).data('checked', false);
+            $(this).removeClass('fas').addClass('far');
+        } else {
+            $(this).data('checked', true);
+            $(this).removeClass('far').addClass('fas');
+        }
+    });
 });
