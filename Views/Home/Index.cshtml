@@ -14,13 +14,12 @@
 <body>
 <div class="container">
     <div class="row">
-        <table class="border shadow-sm table table-bordered table-striped table-dark col-sm-6 offset-3 ">
-            <tr><th>Flag</th><th>Date</th><th>Time</th><th>Location</th></tr>
+        <table class="border table table-bordered table-striped table-dark table-shadow">
+            <tr><th class="text-center">Flag</th><th>Date</th><th>Time</th><th>Location</th></tr>
             @foreach (var e in Model.Events)
             {
                 <tr>
-                <td>@if (e.Flagged) {<a class="fas fa-flag flag"></a>}else
-                    {<a class="far fa-flag flag"></a>}</td>
+                    <td><i data-id="@e.EventId" data-checked="@e.Flagged.ToString().ToLower()" class="@(e.Flagged ? "fas" : "far") fa-flag fa-lg flag"></i></td>
                     <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
                     <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
                     <td>@e.Location.Name</td>
@@ -29,18 +28,18 @@
         </table>
     </div>
     
-    <div class="row">
-        <div class="col-sm-2 offset-3">
+    <div class="row mb-3">
+        <div class="col">
             <button id="first" class="btn btn-primary " type="button" data-page="1"><a class="fa fa-angle-double-left"></a></button>
             <button id="previous" class="btn btn-primary " type="button" data-page="@Model.PagingInfo.PreviousPage"><a class="fa fa-angle-double-left"></a></button>
 
         </div>
-        <div class="col-sm-2 text-center">
+        <div class="col text-center">
             <span id="start">@(Model.PagingInfo.RangeStart)</span>-<span id="end">@(Model.PagingInfo.RangeEnd)</span>
             of
             <span id="total">@(Model.PagingInfo.TotalItems)</span>
         </div>
-        <div class="col-sm-2 text-right">
+        <div class="col text-right">
             <button id="next" class="btn btn-primary " type="button" data-page="@Model.PagingInfo.NextPage"><a class="fa fa-angle-double-right"></a></button>
             <button id="last" class="btn btn-primary " type="button" data-page="@Model.PagingInfo.TotalPages"><a class="fa fa-angle-double-right"></a></button>
         </div>
