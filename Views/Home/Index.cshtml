@@ -19,7 +19,8 @@
             @foreach (var e in Model.Events)
             {
                 <tr>
-                    <td><a class="far fa-flag flag"></a></td>
+                <td>@if (e.Flagged) {<a class="fas fa-flag flag"></a>}else
+                    {<a class="far fa-flag flag"></a>}</td>
                     <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
                     <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
                     <td>@e.Location.Name</td>
